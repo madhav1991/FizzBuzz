@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React ,{ useState,useMemo } from 'react';
 import './App.css';
-
+import { Button } from '@material-ui/core';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const[defaultIntegerValue , setDefaultIntegerValue]= useState(1);
+  
+    const fizzBuzzString = useMemo(() => {
+      let fizzString='';
+      if(defaultIntegerValue % 3 === 0){
+       fizzString= 'Fizz';
+      }
+      if(defaultIntegerValue%5 === 0){
+        fizzString += 'Buzz';
+      }
+     return fizzString
+    },[defaultIntegerValue]); 
+
+    return (
+      <div className="App">
+        <div>
+          {defaultIntegerValue}
+        </div>
+        <div>
+          {fizzBuzzString}
+        </div>
+        <div>
+          <Button onClick = {() => setDefaultIntegerValue(defaultIntegerValue < 100 ? defaultIntegerValue +1: 100)}>
+            Increase Counter
+          </Button>
+        </div>
+        <div>
+          <Button onClick = {() => setDefaultIntegerValue(defaultIntegerValue > 1 ? defaultIntegerValue - 1 : 1)}>
+            Decrease Counter 
+          </Button>
+        </div>
+      </div>
+    );
+  
 }
 
 export default App;
